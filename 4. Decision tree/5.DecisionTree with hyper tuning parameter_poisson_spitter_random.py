@@ -5,28 +5,26 @@ dataset = pd.read_csv('50_Startups.csv')
 dataset = pd.get_dummies(dataset, drop_first=True)
 
 independent = dataset[['R&D Spend', 'Administration', 'Marketing Spend',
-       'State_Florida', 'State_New York']]
+                       'State_Florida', 'State_New York']]
 
 dependent = dataset[['Profit']]
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(independent, dependent, test_size=0.30, random_state=0)
 
-from sklearn.svm import SVR
-#regressor = SVR(kernel='linear', C=0.01, gamma=0.1, epsilon=0.1)
-regressor = SVR(kernel='rbf', C=0.01, gamma=0.1, epsilon=0.1)
 
-regressor.fit(X_train, y_train)
+from sklearn.tree import DecisionTreeRegressor
+sc= DecisionTreeRegressor(criterion='poisson', splitter='best')
+regressor = sc.fit(X_train, y_train)
 
 
-#weight = regressor.coef_
-origin = regressor.n_support_
-support = regressor.support_
-print(support)
-bias = regressor.intercept_
-
+import matplotlib.pyplot as plt
+from sklearn import tree
+tree.plot_tree(regressor)
+#plt.show()
 
 y_pred = regressor.predict(X_test)
+
 
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_pred)
@@ -41,4 +39,4 @@ loaded_model = pickle.load(open(fileName, 'rb'))
 results = loaded_model.predict([[1234,345,4565,1,0]])
 print(results)
 
-# this gave us only -0.05, which is bad, so lets do standardazation in next part
+# this gave us only 0.90

@@ -1,0 +1,35 @@
+import pandas as pd
+
+dataset = pd.read_csv('50_Startups.csv')
+
+dataset = pd.get_dummies(dataset, drop_first=True)
+
+independent = dataset[['R&D Spend', 'Administration', 'Marketing Spend',
+       'State_Florida', 'State_New York']]
+
+dependent = dataset[['Profit']]
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(independent, dependent, test_size=0.30, random_state=0)
+
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+weight = regressor.coef_
+bias = regressor.intercept_
+
+y_pred = regressor.predict(X_test)
+
+from sklearn.metrics import r2_score
+r2 = r2_score(y_test, y_pred)
+print("R2 Score of Multiple Linear Regression Model is:", r2)
+#R2 Score of Multiple Linear Regression Model is: 0.9358680970046243
+
+import pickle
+fileName = 'finalized_model_multiple.sav'
+pickle.dump(regressor, open(fileName, 'wb'))
+
+loaded_model = pickle.load(open(fileName, 'rb'))
+results = loaded_model.predict([[1234,345,4565,1,0]])
+print(results)

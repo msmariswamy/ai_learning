@@ -1,6 +1,6 @@
 import pandas as pd
 
-dataset = pd.read_csv('50_Startups.csv')
+dataset = pd.read_csv('../4. Decision tree/50_Startups.csv')
 
 dataset = pd.get_dummies(dataset, drop_first=True)
 
@@ -34,7 +34,7 @@ print("R2 Score of Multiple Linear Regression Model is:", r2)
 #R2 Score of Multiple Linear Regression Model is: 0.9358680970046243
 
 import pickle
-fileName = 'finalized_model_multiple.sav'
+fileName = '../4. Decision tree/finalized_model_multiple.sav'
 pickle.dump(regressor, open(fileName, 'wb'))
 
 loaded_model = pickle.load(open(fileName, 'rb'))
