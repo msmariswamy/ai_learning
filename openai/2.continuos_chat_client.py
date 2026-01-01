@@ -16,7 +16,10 @@ while input != "quit()":
     messages.append({"role": "user", "content": message})
     response = client.chat.completions.create(
         model="openai/gpt-oss-120b",
-        messages=messages)
+        messages=messages,
+        temperature=0)
+    
+    #here teamprature is crativeness and randomess. 0=no creativeness, 0.8-1=creativeness and random
     reply = (response.choices[0].message.content)
     messages.append({"role": "assistant", "content": reply})
 
