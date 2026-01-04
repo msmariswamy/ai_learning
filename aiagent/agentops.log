@@ -1,0 +1,5 @@
+2026-01-04 23:47:16,407 - INFO - [ConcurrentFuturesInstrumentor] Successfully instrumented concurrent.futures.ThreadPoolExecutor
+2026-01-04 23:47:16,407 - INFO - Session Replay for default trace: https://app.agentops.ai/sessions?trace_id=cfe7feb44fd03f1a2aeaaf875115a98e
+2026-01-04 23:47:17,227 - INFO - You're on the agentops free plan 🤔
+2026-01-04 23:47:18,678 - WARNING - end_session() is deprecated and will be removed in v4 in the future. Use agentops.end_trace() instead.
+2026-01-04 23:47:19,664 - INFO - Session Replay for default.session trace: https://app.agentops.ai/sessions?trace_id=cfe7feb44fd03f1a2aeaaf875115a98e
